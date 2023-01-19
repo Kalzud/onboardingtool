@@ -1,0 +1,98 @@
+<!--require the header-->
+<?php require_once("template/header.phtml"); ?>
+
+<!--Link external stylesheet-->
+<link href="css/bootstrap.css" rel="stylesheet">
+
+
+<!--in page stylesheet-->
+<style>
+    #exportID div{
+        display: block;
+        margin-bottom: auto;
+        margin-top: auto;
+    }
+
+    td{
+        vertical-align: middle;
+    }
+</style>
+
+<!--opening body tag-->
+<body class="body">
+
+<!--Candidate Details Table-->
+    <div id="content_row" style="height: 550px;">
+        <div id="cand_table" class="card" style="overflow: auto;">
+
+            <div style="display: flex;" class="alert">
+                <label style="padding: (10px,10px,10px,10px); margin-left: auto; margin-right: auto;"><?php echo "" . $view->search . " Candidates out of " . $view->rows . " Candidates " ?></label>
+            </div>
+        <!-- Search feature -->
+
+            <!--Export Button-->
+            <div id="exportID" style="display: inline-flex !important; padding-bottom: 2%; padding-top: 2%;" class="col-sm-5 col-md-12 col-lg-12">
+            <div class="align-items-left"><div class="form-group align-items-left d-sm-inline-flex" style="margin-top: auto;">
+                    <a href="../export.php"><button class="btn btn-light btn-outline-secondary" style="margin-left: 55%; width: 100%; padding: 10px; margin-top: auto; margin-bottom: auto;"><i class="bi bi-download">  Export Table</i></button></a>
+                </div>
+            </div>
+
+                <!--Search By Filter Button-->
+            <div class="align-items-right" style="margin-left: auto; margin-right: 4.4%;">
+                <div class="col-sm-5 col-md-12 col-lg-12">
+
+                    <form method="post" class="text-center d-sm-inline-flex">
+
+                        <div>
+                            <input class="form-control" type="text" name="search" placeholder="Search" value="<?php if(isset($_POST['search'])){echo $_POST['search'];}?>">
+                        </div>
+                        <div class="form-group">
+                            <span color="red"><button name="searchBtn" style="margin-left: 10%;" class="btn btn-light btn-outline-secondary" type="submit"><i class="bi bi-search"></i></button> </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            </div>
+
+            <br>
+            <!--Candidate Table itself -->
+           <div class="container" id="table-container">
+                <div class="row align-items-start" style=" border: 1px solid #dee2e6; border-radius: 20px; padding: 0px; margin-bottom: 10px; margin-left: 0.5%; width: 100%">
+
+                    <table class="table table-striped table-hover" style="width:100%; background-color: rgb(250,250,255); border-radius: 20px; margin-bottom: 2px; margin-bottom: 1%">
+                        <thead>
+                                <tr><th></th><th>Name</th><th>Email</th><th>Phone Number</th><th>Job Role</th><th></th></tr>
+                        </thead>
+                            <tbody>
+                                <?php foreach($view->CandidateSearch as $Candidate): ?>
+                                    <tr>
+                                        <td style="text-align:center"><a class="btn btn-info" target="_blank" href='/profile.php?id=<?php echo $Candidate->getCId(); ?>'><i  class="bi bi-file-earmark-person-fill"> View Profile</i></a></td>
+                                        <td style="height:25px;"><p1><?php echo $Candidate->getFullName(); ?></p1></td>
+                                        <td><p1><?php echo $Candidate->getEmail(); ?></p1></td>
+                                        <td><p1><?php echo $Candidate->getPhoneNumber(); ?></p1></td>
+                                        <td><p1><?php echo $Candidate->getRole(); ?></p1></td>
+                                        <td></div><a href="/adminDash.php?id=<?php echo $Candidate->getCId(); ?>"><button class="btn btn-danger"><i class="bi bi-x-circle-fill"></i></button></a></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Delete User PopUp -->
+            <style><?php include "../css/style.css";?></style>
+            <div id="popup1" class="overlay">
+                <div class="popup">
+                    <a class="close" href="#">&times;</a>
+                    <h2>PUT In ID </h2>
+                    <?php foreach($view->Candidate as $Candidate): ?>
+                        You are Editing <?php echo $Candidate->getFullName(); ?>
+                        You are Editing <?php echo $Candidate->getCId(); ?>
+                        <p><a href="/adminDash.php?id=<?php echo $Candidate->getCId(); ?>"><i class="bi bi-x-circle-fill"><button>DELETE</button></i></a></p>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<?php require_once("template/footer.phtml"); ?>

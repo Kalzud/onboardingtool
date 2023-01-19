@@ -1,0 +1,165 @@
+<head>
+
+    <!-- File Links -->
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <script src="js/bootstrap.bundle.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <!--Navigation Bar-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div id="navbarCollapse" class="collapse navbar-collapse">
+                <ul class="nav nav-item">
+                    <li style="display: block; padding: 1rem">
+                        <!--Back Button-->
+                        <a href="../adminDash.php"><button type="button" name="back" class="btn btn-danger btn-lg" >Back</button></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</head>
+
+<title> KRM Dashboard </title>
+<style>
+    .navbar-nav {
+        margin-left: auto;
+    }
+</style>
+<!--Start of page Body-->
+<body class="body">
+
+<section class="vh-100" style="background-color: #f8f8ff;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-xl-10">
+                <div class="card" style="border-radius: 1rem;">
+                    <div class="col-md-6 col-lg-12">
+                        <!--Candidate Register Form-->
+                        <form method="post" action="../registration.php">
+                            <div class="card-body p-4 p-lg-5 text-black" id="addForm">
+                            <!-- Candidate form title -->
+                                <span class="h1 fw-bold mb-0">Candidate Form</span>
+
+                                <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Enter Details Below</h5>
+
+                                <!--Full Name Input-->
+                                <div class="form-outline mb-4">
+                                    <label class="form-label fw-bold" for="form2Example17">Full name</label>
+                                    <input type="text" id="form2Example17" required class="form-control form-control-lg" name="Full_Name" value="<?php if(isset($_POST['Full_Name'])){echo $_POST['Full_Name'];} ?>"/>
+                                    <small id="nameHelp" class="form-text text-muted">Make sure to include your full name (Middle Name optional).</small>
+                                </div>
+
+                                <!-- Address input -->
+                                <div class="form-outline mb-4">
+                                    <label class="form-label fw-bold" for="form2Example27">Address</label>
+                                    <input type="text" id="form2Example27" required class="form-control form-control-lg" name="Address" value="<?php if(isset($_POST['Address'])){echo $_POST['Address'];} ?>"/>
+                                    <small id="addressHelp" class="form-text text-muted">Street Name, Building Number, <br> Postal code, <br> City.</small>
+                                </div>
+
+                                <!-- Date of Birth -->
+                                <div class="form-outline mb-4">
+                                    <label class="form-label fw-bold" for="form2Example17">Date Of Birth</label>
+                                    <input type="date" id="form2Example17"  required class="form-control form-control-lg" name="dateOfBirth" value="<?php if(isset($_POST['dateOfBirth'])){echo $_POST['dateOfBirth'];} ?>"/>
+                                </div>
+
+                                <!--Email Input-->
+                                <div class="form-outline mb-4">
+                                    <label class="form-label fw-bold" for="form2Example17">Email</label>
+                                    <input type="email" id="form2Example17" required class="form-control form-control-lg" name="Email" value="<?php if(isset($_POST['Email'])){echo $_POST['Email'];} ?>"/>
+                                    <small id="emailHelp" class="form-text text-muted">E.g. JohnSmith@gmail.com</small>
+                                </div>
+
+                                <!-- Phone Number -->
+                                <div class="form-outline mb-4">
+                                    <label class="form-label fw-bold" for="form2Example17">Phone Number</label>
+                                    <input type="text" id="form2Example17" required class="form-control form-control-lg" name="Phone_number" value="<?php if(isset($_POST['Phone_number'])){echo $_POST['Phone_number'];} ?>"/>
+                                    <small id="nameHelp" class="form-text text-muted">Include Country code. E.g. +31</small>
+                                </div>
+
+                                <!-- Job Role -->
+                                <div class="form-outline mb-4">
+                                    <div class="dropdown">
+
+
+                                        <label class="form-label fw-bold">Select Role</label>
+                                        <select name="Role" class="form-control" type="submit" required value="<?php if  (isset($_POST['Role'])) { echo $_POST['Role']; } ?>" >
+                                            <option type="text" value="Software Developer" >Software Developer</option>
+                                            <option type="text" value="Full-stack Developer" >Full-stack Developer</option>
+                                            <option type="text" value="Front-end Developer " >Front-end Developer</option>
+                                            <option type="text" value="JavaScript Developer " >JavaScript Developer</option>
+                                            <option type="text" value="Back-end Developer " >Back-end Developer</option>
+                                            <option type="text" value="DevOps Engineer " >DevOps Engineer</option>
+                                            <option type="text" value="UX/UI Design " >UX/UI Design</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!--Comment Input-->
+                                <div class="form-outline mb-4">
+                                    <label class="form-label fw-bold" for="form2Example17" hidden>Comment Section</label>
+                                    <textarea type="text" id="form2Example17" class="form-control form-control-lg" name="Comment_section" hidden value="<?php if(isset($_POST['Comment_section'])){echo $_POST['Comment_section'];} ?>"></textarea>
+                                </div>
+
+                                <!--Goals Input-->
+                                <div class="form-outline mb-4">
+                                    <label class="form-label fw-bold" for="form2Example17">Goals</label>
+                                    <textarea type="text" id="form2Example17" class="form-control form-control-lg" name="Goals"  value="<?php if(isset($_POST['Goals'])){echo $_POST['Goals'];} ?>"></textarea>
+                                    <small id="goalsHelp" class="form-text text-muted">Include Candidates' goals here.</small>
+                                </div>
+
+                                <!--Skills Input-->
+                                <div class="form-outline mb-4" hidden>
+                                    <label class="form-label fw-bold" for="form2Example17" >Skills</label>
+                                    <textarea type="text" id="form2Example17" class="form-control form-control-lg" name="Candidate_skills" value="<?php if(isset($_POST['Candidate_skills'])){echo $_POST['Candidate_skills'];} ?>"></textarea>
+                                </div>
+
+                                <!--Salary Input-->
+                                <div class="form-outline mb-4">
+                                    <label class="form-label fw-bold" for="form2Example17" hidden>Salary</label>
+                                    <input type="hidden" id="form2Example17" class="form-control form-control-lg#" name="Salary" hidden value="<?php if(isset($_POST['Salary'])){echo $_POST['Salary'];} ?>"/>
+                                </div>
+
+                                <!--Contract Recieved Input-->
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="form2Example17" hidden>Contract Received</label>
+                                    <input type="hidden" id="form2Example17" class="form-control form-control-lg#" name="contract_received" hidden value="0"/>
+                                </div>
+
+                                <!--Equipment Needs Input-->
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="form2Example17" hidden>Equipment Need</label>
+                                    <input type="hidden" id="form2Example17" class="form-control form-control-lg#" name="equipment_need" hidden value="<?php if(isset($_POST['equipment_need'])){echo $_POST['equipment_need'];} ?>"/>
+                                </div>
+
+                                <!--Training Input-->
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="form2Example17" hidden>Training</label>
+                                    <input type="hidden" id="form2Example17" class="form-control form-control-lg#" name="training" hidden value="<?php if(isset($_POST['training'])){echo $_POST['training'];} ?>"/>
+                                </div>
+
+                                <!--Contract Sent Input-->
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="form2Example17" hidden>Contract Sent</label>
+                                    <input type="hidden" id="form2Example17" class="form-control form-control-lg#" name="contract_sent" hidden value="0"/>
+                                </div>
+
+                                <!-- Registration button -->
+                                <div>
+                                    <button type="submit" name="register" class="btn btn-light btn-lg">Register</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

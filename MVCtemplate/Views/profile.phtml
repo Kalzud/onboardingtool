@@ -1,0 +1,589 @@
+<!--  for each loop to run through all candidates in database -->
+<?php foreach($view->Candidate as $Candidate): ?>
+
+<head>
+
+<body role="document">
+<!--Navigation bar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="navbarCollapse" class="collapse navbar-collapse">
+            <ul class="nav-item" style="display:inline-flex; margin-bottom: 0; justify-content: space-evenly;">
+                <li style="display: block; margin-right: auto; margin-top: 20%;">
+<!--                    Back button-->
+                    <form onclick="close_window(); return false;">
+                        <button class="btn btn-danger btn-lg" type="button"><i class="bi bi-arrow-left" style="margin-bottom:0;"></button></i>
+                    </form>
+                </li>
+            </ul>
+            <ul class="nav-item" style="display:inline-flex; margin:auto; justify-content: space-evenly;">
+                <li class="nav-item" style="display: block;">
+<!--                    Title-->
+                    <h2 style="position: relative; left:-55px;" class="navbar-text">User Profile</h2>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="/css/bootstrap-theme.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+
+    <!--progress bar script and style-->
+    <script>
+
+        function close_window() {
+            if (confirm("Are you sure you want to close the window?")) {
+                close();
+            }
+        }
+
+    </script>
+    <style>
+        @keyframes growProgressBar {
+            0%, 33% { --pgPercentage: 0; }
+            100% { --pgPercentage: var(--value); }
+        }
+
+        @property --pgPercentage {
+            syntax: '<number>';
+            inherits: false;
+            initial-value: 0;
+        }
+
+        div[role="progressbar"] {
+            --size: 12rem;
+            --fg: #f68b5c;
+            --bg: #def;
+            --pgPercentage: var(--value);
+            animation: growProgressBar 3s 1 forwards;
+            width: var(--size);
+            height: var(--size);
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background:
+                    radial-gradient(closest-side, white 80%, transparent 0 99.9%, white 0),
+                    conic-gradient(var(--fg) calc(var(--pgPercentage) * 1%), var(--bg) 0);
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: calc(var(--size) / 5);
+            color: var(--fg);
+        }
+
+        div[role="progressbar"]::before {
+            counter-reset: percentage var(--value);
+            content: counter(percentage) '%';
+        }
+
+
+        #profile_container{
+            display:flex;
+            justify-content: space-evenly;
+            width: 100%;
+        }
+
+        #pro_row{
+            display: flex;
+            padding: 10px;
+            width:100%;
+            border-bottom: 10px;
+            border-bottom: 1px solid dimgray;
+        }
+
+        #left_side{
+            padding: 10px;
+            width: 40%;
+        }
+
+        #right_side{
+            padding: 10px;
+            width: 40%;
+        }
+
+        #pro_row label{
+            font-weight: Bold;
+            width: 28%;
+            text-align: left;
+            padding:2% 0;
+        }
+
+        #pro_row p1{
+            width:60%;
+            padding:2% 0;
+        }
+
+        #pro_row a{
+            width:28%;
+            height: 10%;
+            padding: 10px 0;
+        }
+        #bottom_row{
+            padding-top:3%;
+            padding-left: 1%;
+            padding-right:1%;
+            padding-bottom: 3%;
+            display:flex;
+            width:100%;
+            justify-content: space-evenly;
+        }
+
+        #bottom_row label{
+            width: 60%;
+            font-weight: Bold;
+            text-align: center;
+        }
+
+        #bottom_row p{
+            width:100%
+        }
+
+        #bottom_row a{
+            width:50%;
+            display: inline-block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #big_boxes{
+            width:30%;
+            text-align: center;
+        }
+
+        #status{
+            width:100%;
+            display: flex;
+            justify-content: space-evenly;
+            padding-bottom: 3%;
+        }
+
+        #chart lable{
+            text-align: center;
+            display: block;
+            margin-right: auto;
+            margin-left: auto;
+            width: fit-content;
+            padding-bottom: 5%;
+            font-weight: bold;
+        }
+
+        body{
+            background: white;
+        }
+
+
+
+    </style>
+</head>
+
+<body>
+
+
+<!--Profile information-->
+<div id="profile_container">
+
+    <div id="left_side">
+        <div id="pro_row">
+            <label>Full Name:</label>
+            <p1><?php echo $Candidate->getFullName(); ?></p1><a class="btn btn-light btn-outline-secondary" href="#fullname">Edit</a>
+        </div>
+        <div id="pro_row">
+            <label>Date of Birth:</label>
+            <p1><?php echo $Candidate->getDateOfBirth(); ?></p1><a class="btn btn-light btn-outline-secondary" href="#dob">Edit</a>
+        </div>
+        <div id="pro_row">
+            <label>Phone Number:</label>
+            <p1><?php echo $Candidate->getPhoneNumber(); ?></p1><a class="btn btn-light btn-outline-secondary" href="#number">Edit</a>
+        </div>
+        <div id="pro_row">
+            <label>Salary:</label>
+            <p1>€<?php echo $Candidate->getSalary(); ?></p1><a class="btn btn-light btn-outline-secondary" href="#salary">Edit</a>
+        </div>
+        <div id="pro_row">
+            <label>Goals:</label>
+            <p1><?php echo $Candidate->getGoals(); ?></p1><a class="btn btn-light btn-outline-secondary" href="#goal">Edit</a>
+        </div>
+    </div>
+    <div id="right_side">
+        <div id="pro_row">
+            <label>Address:</label>
+            <p1><?php echo $Candidate->getAddress(); ?></p1><a class="btn btn-light btn-outline-secondary" href="#address">Edit</a>
+        </div>
+        <div id="pro_row">
+            <label>Email:</label>
+            <p1><?php echo $Candidate->getEmail(); ?></p1><a class="btn btn-light btn-outline-secondary" href="#email">Edit</a>
+        </div>
+        <div id="pro_row">
+            <label>Role:</label>
+            <p1><?php echo $Candidate->getRole(); ?></p1><a class="btn btn-light btn-outline-secondary" href="#role">Edit</a>
+        </div>
+        <div id="pro_row">
+            <label>Skills:</label>
+            <p1><?php echo $Candidate->getCandidateSkills(); ?></p1><a class="btn btn-light btn-outline-secondary" href="#skill">Edit</a>
+        </div>
+
+        <div id="pro_row">
+            <label>Comments:</label>
+            <p1><?php echo $Candidate->getCommentSection(); ?></p1><a class="btn btn-light btn-outline-secondary" href="#comment">Edit</a>
+        </div>
+    </div>
+</div>
+<!--Application status-->
+<div id="bottom_row">
+
+    <div id="big_boxes">
+        <label>Contract Sent:</label>
+        <p><?php
+            if ($Candidate->getContractSent() == '0') {
+                echo 'No';
+            } elseif($Candidate->getContractSent() == '1'){
+                echo 'Yes';
+            }
+            ?></p> <a class="btn btn-light btn-outline-secondary" href="#sent">Edit</a>
+    </div>
+
+    <div id="big_boxes">
+        <label>Contract Signed:</label>
+        <p><?php
+            if ($Candidate->getContractReceived() == '0') {
+                echo 'No';
+            } elseif($Candidate->getContractReceived() == '1'){
+                echo 'Yes';
+            }
+            ?></p> <a class="btn btn-light btn-outline-secondary" href="#received">Edit</a>
+    </div>
+
+    <div id="big_boxes">
+        <label>Equipment Requirements:</label>
+        <p><?php echo $Candidate->getEquipmentNeed(); ?></p><a class="btn btn-light btn-outline-secondary" href="#need">Edit</a>
+    </div>
+
+    <div id="big_boxes">
+        <label>Training:</label>
+        <p><?php echo $Candidate->getTraining(); ?></p><a class="btn btn-light btn-outline-secondary" href="#train">Edit</a>
+    </div>
+</div>
+<!--APPLICATION PROGRESS Bar-->
+<div id="status">
+     <div id="chart">
+         <lable>Form Validated:</lable>
+         <div role="progressbar"
+              aria-valuemin="0"
+              style="--value:100 ">
+         </div>
+     </div>
+
+    <div id="chart">
+         <lable>Contract Sent:</lable>
+         <div role="progressbar"
+              aria-valuemin="0"
+              aria-valuemax="5"
+             <?php echo
+             $x = 100;
+             $y =  $Candidate->getContractSent();
+             $z= $x*$y;
+             ?>     style="--value:<?php echo $z; ?>">
+         </div>
+    </div>
+<div id="chart">
+         <lable>Contract Signed:</lable>
+         <div role="progressbar"
+              aria-valuemin="0"
+              aria-valuemax="5"
+             <?php echo
+             $x = 100;
+             if ($Candidate->getContractSent() == '0'){
+                 $y = 0;
+             }
+             else{
+                 $y =  $Candidate->getContractReceived();
+             }
+             $z= $x*$y;
+             ?>     style="--value:<?php echo $z; ?>">
+         </div>
+</div>
+     </div>
+
+<?php endforeach; ?>
+</body>
+
+<style><?php include "../css/style.css";?></style>
+
+
+<!--Popup for full name-->
+<div id="fullname" class="overlay">
+    <div class="popup">
+        <a class="close" href="#">&times;</a>
+        <h2></h2>
+        <form method="post" action="update.php">
+            <div class="form-outline mb-4">
+                <input type="hidden" id="form2Example17"  name="c_id" value="<?php echo $Candidate->getCId(); ?>"/>
+            </div>
+            <div class="form-outline mb-4">
+                <label class="form-label" style="font-weight: bold" for="form2Example17">Insert new Name</label>
+                <input type="text" id="form2Example17" class="form-control form-control-lg" name="Full_Name" value="<?php echo $Candidate->getFullName(); ?>" required/>
+            </div>
+            <div class="content">
+                <button type="submit" name="editFullname" class="btn btn-light btn-outline-secondary" style="display: block; margin-right: auto; margin-left:auto">Save</button></a>
+            </div>
+        </form>
+    </div>
+</div>
+<!--POPUP FOR ADDRESS-->
+<div id="address" class="overlay">
+    <div class="popup">
+        <a class="close" href="#">&times;</a>
+        <form method="post" action="update.php">
+            <div class="form-outline mb-4">
+                <input type="hidden" id="form2Example17"  name="c_id" value="<?php echo $Candidate->getCId(); ?>"/>
+            </div>
+            <div class="form-outline mb-4">
+                <label class="form-label" style="font-weight: bold" for="form2Example27">Insert new Address</label>
+                <input  type="text" id="form2Example27"  class="form-control form-control-lg" name="Address" value="<?php echo $Candidate->getAddress(); ?>"/>
+            </div>
+            <div class="content">
+                <button type="submit" name="editAddress" class="btn btn-light btn-outline-secondary" style="display: block; margin-right: auto; margin-left:auto">Save</button></a>
+            </div>
+        </form>
+    </div>
+</div>
+<!--POPUP FOR ROLE-->
+<div id="role" class="overlay">
+    <div class="popup">
+        <a class="close" href="#">&times;</a>
+        <form method="post" action="update.php">
+            <div class="form-outline mb-4">
+                <input type="hidden" id="form2Example17"  name="c_id" value="<?php echo $Candidate->getCId(); ?>"/>
+            </div>
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form2Example27" style="font-weight: bold">Insert new Role</label>
+                <input  type="text" id="form2Example27" class="form-control form-control-lg" name="Role" value="<?php echo $Candidate->getRole(); ?>"/>
+            </div>
+            <div class="content">
+                <button type="submit" name="editRole" class="btn btn-light btn-outline-secondary" style="display: block; margin-right: auto; margin-left:auto">Save</button></a>
+            </div>
+        </form>
+    </div>
+</div>
+<!--POPUP FOR EMAIL-->
+<div id="email" class="overlay">
+    <div class="popup">
+        <a class="close" href="#">&times;</a>
+        <form method="post" action="update.php">
+            <div class="form-outline mb-4">
+                <input type="hidden" id="form2Example17"  name="c_id" value="<?php echo $Candidate->getCId(); ?>"/>
+            </div>
+            <div class="form-outline mb-4">
+                <label class="form-label" style="font-weight: bold" for="form2Example27">Insert new Email</label>
+                <input  type="email" id="form2Example27" class="form-control form-control-lg" name="Email" value="<?php echo $Candidate->getEmail(); ?>"/>
+            </div>
+            <div class="content">
+                <button type="submit" name="editEmail" class="btn btn-light btn-outline-secondary" style="display: block; margin-right: auto; margin-left:auto">Save</button></a>
+            </div>
+        </form>
+    </div>
+</div>
+<!--POPUP FOR PHONE NUMBER-->
+<div id="number" class="overlay">
+    <div class="popup">
+        <a class="close" href="#">&times;</a>
+        <form method="post" action="update.php">
+            <div class="form-outline mb-4">
+                <input type="hidden" id="form2Example17"  name="c_id" value="<?php echo $Candidate->getCId(); ?>"/>
+            </div>
+            <div class="form-outline mb-4">
+                <label class="form-label" style="font-weight: bold" for="form2Example27">Insert new Phone Number</label>
+                <input  type="text" id="form2Example27" class="form-control form-control-lg" name="Phone_number" value="<?php echo $Candidate->getPhoneNumber(); ?>"/>
+            </div>
+            <div class="content">
+                <button type="submit" name="editNumber" class="btn btn-light btn-outline-secondary" style="display: block; margin-right: auto; margin-left:auto">Save</button></a>
+            </div>
+        </form>
+    </div>
+</div>
+<!--POPUP FOR DATE OF BIRTH-->
+<div id="dob" class="overlay">
+    <div class="popup">
+        <a class="close" href="#">&times;</a>
+        <form method="post" action="update.php">
+            <div class="form-outline mb-4">
+                <input type="hidden" id="form2Example17"  name="c_id" value="<?php echo $Candidate->getCId(); ?>"/>
+            </div>
+            <div class="form-outline mb-4">
+                <label class="form-label" style="font-weight: bold" for="form2Example17">Select new Date Of Birth</label>
+                <input type="date" id="form2Example17" class="form-control form-control-lg" name="dateOfBirth" value="<?php echo $Candidate->getDateOfBirth(); ?>"/>
+            </div>
+            <div class="content">
+                <button  type="submit" name="editBirth" class="btn btn-light btn-outline-secondary" style="display: block; margin-right: auto; margin-left:auto">Save</button></a>
+            </div>
+        </form>
+    </div>
+</div>
+<!--POPUP FOR Goals-->
+<div id="goal" class="overlay">
+    <div class="popup">
+        <a class="close" href="#">&times;</a>
+        <form method="post" action="update.php">
+            <div class="form-outline mb-4">
+                <input type="hidden" id="form2Example17"  name="c_id" value="<?php echo $Candidate->getCId(); ?>"/>
+            </div>
+            <div class="form-outline mb-4">
+                <label class="form-label" style="font-weight: bold" for="form2Example17">Goals</label>
+                <textarea type="text" id="form2Example17" class="form-control form-control-lg" name="Goals" value="<?php echo $Candidate->getGoals(); ?>"><?php echo $Candidate->getGoals(); ?></textarea>
+            </div>
+            <div class="content">
+                <button  type="submit" name="editGoal" class="btn btn-light btn-outline-secondary" style="display: block; margin-right: auto; margin-left:auto">Save</button></a>
+            </div>
+        </form>
+    </div>
+</div>
+<!--POPUP FOR Skills-->
+<div id="skill" class="overlay">
+    <div class="popup">
+        <a class="close" href="#">&times;</a>
+        <form method="post" action="update.php">
+            <div class="form-outline mb-4">
+                <input type="hidden" id="form2Example17"  name="c_id" value="<?php echo $Candidate->getCId(); ?>"/>
+            </div>
+            <div class="form-outline mb-4">
+                <label class="form-label" style="font-weight: bold" for="form2Example17">Skills</label>
+                <textarea type="text" id="form2Example17" class="form-control form-control-lg" name="Candidate_skills" value="<?php echo $Candidate->getCandidateSkills(); ?>"><?php echo $Candidate->getCandidateSkills(); ?></textarea>
+            </div>
+            <div class="content">
+                <button type="submit" name="editSkill" class="btn btn-light btn-outline-secondary" style="display: block; margin-right: auto; margin-left:auto">Save</button></a>
+            </div>
+        </form>
+    </div>
+</div>
+<!--POPUP FOR SALARY-->
+<div id="salary" class="overlay">
+    <div class="popup">
+        <a class="close" href="#">&times;</a>
+        <form method="post" action="update.php">
+            <div class="form-outline mb-4">
+                <input type="hidden" id="form2Example17"  name="c_id" value="<?php echo $Candidate->getCId(); ?>"/>
+            </div>
+            <div class="form-outline mb-4">
+                <label class="form-label" style="font-weight: bold" for="form2Example27">Please use only currency symbols</label>
+                <label class="form-label" style="font-weight: bold" for="form2Example27">Insert new Salary</label>
+                <input  type="text" id="form2Example27" class="form-control form-control-lg" name="Salary" value="<?php echo $Candidate->getSalary(); ?>"/>
+            </div>
+            <div class="content">
+                <button type="submit" name="editSalary" class="btn btn-light btn-outline-secondary" style="display: block; margin-right: auto; margin-left:auto">Save</button></a>
+            </div>
+        </form>
+    </div>
+</div>
+<!--POPUP FOR COMMENT-->
+<div id="comment" class="overlay">
+    <div class="popup">
+        <a class="close" href="#">&times;</a>
+        <form method="post" action="update.php">
+            <div class="form-outline mb-4">
+                <input type="hidden" id="form2Example17"  name="c_id" value="<?php echo $Candidate->getCId(); ?>"/>
+            </div>
+            <div class="form-outline mb-4">
+                <label class="form-label" style="font-weight: bold" for="form2Example17">Comment Section</label>
+                <textarea type="text" id="form2Example17" class="form-control form-control-lg" name="Comment_section" value="<?php echo $Candidate->getCommentSection(); ?>"><?php echo $Candidate->getCommentSection(); ?></textarea>
+            </div>
+            <div class="content">
+                <button  type="submit" name="editComment" class="btn btn-light btn-outline-secondary" style="display: block; margin-right: auto; margin-left:auto"">Save</button></a>
+            </div>
+        </form>
+    </div>
+</div>
+<!--POPUP FOR Contract sent-->
+<div id="sent" class="overlay">
+    <div class="popup">
+        <a class="close" href="#">x</a>
+        <form method="post" action="update.php">
+            <div class="form-outline mb-4">
+                <input type="hidden" id="form2Example17"  name="c_id" value="<?php echo $Candidate->getCId(); ?>"/>
+            </div>
+            <div class="form-outline mb-4">
+                <label class="form-label" style="font-weight: bold" for="form2Example27">Select if contract has been sent</label>
+                <select  type="submit" class="form-control form-control-lg" name="contract_sent" >
+                    <option type="text" value="1">Yes</option>
+                    <option type="text" value="0">No</option>
+                </select>
+            </div>
+            <div class="content">
+                <button type="submit" name="editSent" class="btn btn-light btn-outline-secondary" style="display: block; margin-right: auto; margin-left:auto">Save</button></a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!--POPUP FOR Contract received-->
+<div id="received" class="overlay">
+    <div class="popup">
+        <a class="close" href="#">x</a>
+        <?php if($Candidate->getContractSent() == '0') : ?>
+        <h2>This can only be Edited <br>
+            after Contract is sent</h2>
+        <?php endif;?>
+        <form method="post" action="update.php">
+            <div class="form-outline mb-4">
+                <input type="hidden" id="form2Example17"  name="c_id" value="<?php echo $Candidate->getCId(); ?>"/>
+            </div>
+            <?php if($Candidate->getContractSent() == '1') : ?>
+            <div class="form-outline mb-4">
+                <label class="form-label" style="font-weight: bold" for="form2Example27">Select if contract has been received</label>
+                <select  type="submit" class="form-control form-control-lg" name="contract_received" >
+                    <option type="text" value="1">Yes</option>
+                    <option type="text" value="0">No</option>
+                </select>
+            </div>
+            <div class="content">
+                <button type="submit" name="editReceived" class="btn btn-light btn-outline-secondary" style="display: block; margin-right: auto; margin-left:auto">Save</button></a>
+            </div>
+            <?php endif;?>
+        </form>
+    </div>
+</div>
+
+<!--POPUP FOR Equipment-->
+<div id="need" class="overlay">
+    <div class="popup">
+        <a class="close" href="#">&times;</a>
+        <form method="post" action="update.php">
+            <div class="form-outline mb-4">
+                <input type="hidden" id="form2Example17"  name="c_id" value="<?php echo $Candidate->getCId(); ?>"/>
+            </div>
+            <div class="form-outline mb-4">
+                <label class="form-label" style="font-weight: bold" for="form2Example17">Equipment Needs</label>
+                <textarea type="text" id="form2Example17" class="form-control form-control-lg" name="equipment_need" value="<?php echo $Candidate->getEquipmentNeed(); ?>"><?php echo $Candidate->getEquipmentNeed(); ?></textarea>
+            </div>
+            <div class="content">
+                <button  type="submit" name="editNeed" class="btn btn-light btn-outline-secondary" style="display: block; margin-right: auto; margin-left:auto">Save</button></a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!--POPUP FOR Training-->
+<div id="train" class="overlay">
+    <div class="popup">
+        <a class="close" href="#">&times;</a>
+        <form method="post" action="update.php">
+            <div class="form-outline mb-4">
+                <input type="hidden" id="form2Example17"  name="c_id" value="<?php echo $Candidate->getCId(); ?>"/>
+            </div>
+            <div class="form-outline mb-4">
+                <label class="form-label" style="font-weight: bold" for="form2Example17">Training</label>
+                <textarea type="text" id="form2Example17" class="form-control form-control-lg" name="training" value="<?php echo $Candidate->getTraining(); ?>"><?php echo $Candidate->getTraining(); ?></textarea>
+            </div>
+            <div class="content">
+                <button  type="submit" name="editTrain" class="btn btn-light btn-outline-secondary" style="display: block; margin-right: auto; margin-left:auto">Save</button></a>
+            </div>
+        </form>
+    </div>
+</div>
+    </body>
+    </html>
+<?php require_once ("template/footer.phtml"); ?>
